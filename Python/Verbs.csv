@@ -1,0 +1,13 @@
+verb,method,helptext,arg
+list,ListReleases,Get a list of releases for this repo.,
+release-id,GetReleaseFromId,Get release from an ID.,Id
+release-tag,GetReleaseFromTag,Get release from a tag.,Tag
+latest,GetReleaseLatest,Get the latest release for this repo.,
+release,PostRelease,Make a new release for this repo.,
+edit,EditRelease,Record changes to the repository.,Id
+delete,DeleteRelease,Delete a release using an ID.,Id
+assets,ListReleaseAssets,Get a list of assets for this release.,Id
+asset-id,GetSingleReleaseAsset,Get an asset from an ID.,Id
+upload-asset,UploadReleaseAsset,Upload an asset to a release.,Id
+edit-asset,EditReleaseAsset,Change name/label of an asset. ,Id
+delete-asset,DeleteReleaseAsset,Delete an asset.,Id
