@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GitApiResponse.cs" />
-    <Compile Include="Help_Fakes.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramArguments.cs" />
