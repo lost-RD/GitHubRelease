@@ -11,3 +11,4 @@ asset-id,GetSingleReleaseAsset,Get an asset from an ID.,Id
 upload-asset,UploadReleaseAsset,Upload an asset to a release.,Id
 edit-asset,EditReleaseAsset,Change name/label of an asset. ,Id
 delete-asset,DeleteReleaseAsset,Delete an asset.,Id
+dummy,Dummy,Dummy option,

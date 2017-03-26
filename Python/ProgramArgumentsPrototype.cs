@@ -95,3 +95,23 @@ namespace GitHubRelease
 	}
 
 }
+		int Main(string[] args)
+		{
+			return Parser.Default.ParseArguments<ListReleasesOptions, GetReleaseFromIdOptions, GetReleaseFromTagOptions, GetReleaseLatestOptions, PostReleaseOptions, EditReleaseOptions, DeleteReleaseOptions, ListReleaseAssetsOptions, GetSingleReleaseAssetOptions, UploadReleaseAssetOptions, EditReleaseAssetOptions, DeleteReleaseAssetOptions, DummyOptions, DummyOptions>(args)
+			  .MapResult(
+				(
+					(ListReleasesOptions opts) => ListReleases(opts.Owner, opts.Repo),
+					(GetReleaseFromIdOptions opts) => GetReleaseFromId(opts.Owner, opts.Repo, opts.Id),
+					(GetReleaseFromTagOptions opts) => GetReleaseFromTag(opts.Owner, opts.Repo, opts.Tag),
+					(GetReleaseLatestOptions opts) => GetReleaseLatest(opts.Owner, opts.Repo),
+					(PostReleaseOptions opts) => PostRelease(opts.Owner, opts.Repo),
+					(EditReleaseOptions opts) => EditRelease(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseOptions opts) => DeleteRelease(opts.Owner, opts.Repo, opts.Id),
+					(ListReleaseAssetsOptions opts) => ListReleaseAssets(opts.Owner, opts.Repo, opts.Id),
+					(GetSingleReleaseAssetOptions opts) => GetSingleReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(UploadReleaseAssetOptions opts) => UploadReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(EditReleaseAssetOptions opts) => EditReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseAssetOptions opts) => DeleteReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(DummyOptions opts) => Dummy(opts.Owner, opts.Repo),
+				errs => 1);
+		}

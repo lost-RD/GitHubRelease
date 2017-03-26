@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using RestSharp;
 using Newtonsoft.Json;
 using CommandLine;
-using CommandLine.Text;
 
 namespace GitHubRelease
 {
@@ -18,27 +14,25 @@ namespace GitHubRelease
 			get { return GetAlpha(); }
 		}
 
-		static void Main(string[] args)
+		int Main(string[] args)
 		{
-			// Obviously this isn't working code but I'm clearly misunderstanding it
-			return Parser.Default.ParseArguments<ProgramArguments.GetReleaseFromIdSubOptions>(args)
+			return Parser.Default.ParseArguments<ListReleasesOptions, GetReleaseFromIdOptions, GetReleaseFromTagOptions, GetReleaseLatestOptions, PostReleaseOptions, EditReleaseOptions, DeleteReleaseOptions, ListReleaseAssetsOptions, GetSingleReleaseAssetOptions, UploadReleaseAssetOptions, EditReleaseAssetOptions, DeleteReleaseAssetOptions, DummyOptions, DummyOptions>(args)
 			  .MapResult(
-				(ProgramArguments.GetReleaseFromIdSubOptions opts) => GetLatestReleaseId(opts)
+				(
+					(ListReleasesOptions opts) => ListReleases(opts.Owner, opts.Repo),
+					(GetReleaseFromIdOptions opts) => GetReleaseFromId(opts.Owner, opts.Repo, opts.Id),
+					(GetReleaseFromTagOptions opts) => GetReleaseFromTag(opts.Owner, opts.Repo, opts.Tag),
+					(GetReleaseLatestOptions opts) => GetReleaseLatest(opts.Owner, opts.Repo),
+					(PostReleaseOptions opts) => PostRelease(opts.Owner, opts.Repo),
+					(EditReleaseOptions opts) => EditRelease(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseOptions opts) => DeleteRelease(opts.Owner, opts.Repo, opts.Id),
+					(ListReleaseAssetsOptions opts) => ListReleaseAssets(opts.Owner, opts.Repo, opts.Id),
+					(GetSingleReleaseAssetOptions opts) => GetSingleReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(UploadReleaseAssetOptions opts) => UploadReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(EditReleaseAssetOptions opts) => EditReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseAssetOptions opts) => DeleteReleaseAsset(opts.Owner, opts.Repo, opts.Id),
+					(DummyOptions opts) => Dummy(opts.Owner, opts.Repo),
 				errs => 1);
-		}
-
-		public class Application
-		{
-			static public void Run(ProgramArguments o)
-			{
-				string owner = o.Owner;
-				string repo = o.Repo;
-				Console.WriteLine(owner + ", " + repo);
-
-				Console.WriteLine("Alpha: " + GetAlpha());
-				Console.WriteLine("id of latest release: " + GetLatestReleaseId(owner, repo));
-				//IRestResponse response = PostRelease("lost-RD", "FloorBeautyRebalance");
-			}
 		}
 
 		static string GetAlpha()
@@ -209,6 +203,11 @@ namespace GitHubRelease
 			var request = new RestRequest(Method.DELETE);
 			IRestResponse response = client.Execute(request);
 			return response;
+		}
+
+		static void Dummy(string owner, string repo)
+		{
+			Console.WriteLine(String.Format("{0}, {1}", owner, repo));
 		}
 
 	}
