@@ -14,6 +14,7 @@ namespace GitHubRelease
 		{
 			get { return GetAlpha(); }
 		}
+		public static string access_token = System.IO.File.ReadAllText("access.token");
 
 		static int Main(string[] args)
 		{
@@ -146,7 +147,7 @@ namespace GitHubRelease
 			// POST /repos/:owner/:repo/releases
 			/* string tag_name, target_commitish, name, body
 			 * bool draft, prerelease */
-			string client_path = root + "/repos/" + owner + "/" + repo + "/releases";
+			string client_path = root + "/repos/" + owner + "/" + repo + "/releases?access_token="+access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.POST);
 			request.AddParameter("tag_name", tag_name, "application/json", ParameterType.RequestBody);
@@ -176,7 +177,7 @@ namespace GitHubRelease
 			// PATCH /repos/:owner/:repo/releases/:id
 			/* string: tag_name, target_commitish, name, body
 			 * bool draft, prerelease */
-			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/" + id;
+			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/" + id + "?access_token=" + access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.PATCH);
 			request.AddParameter("tag_name", "test_tag", ParameterType.RequestBody);
@@ -201,7 +202,7 @@ namespace GitHubRelease
 		static IRestResponse DeleteRelease(string owner, string repo, string id)
 		{
 			// DELETE /repos/:owner/:repo/releases/:id
-			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/" + id;
+			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/" + id + "?access_token=" + access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.DELETE);
 			IRestResponse response = client.Execute(request);
@@ -262,7 +263,7 @@ namespace GitHubRelease
 			/* string: Content-Type, name, label
 			 * Valid content types: https://www.iana.org/assignments/media-types/media-types.xhtml 
 			 * We'll be going with application/zip here */
-			string client_path = upload_url + "/repos/" + owner + "/" + repo + "/releases/" + id;
+			string client_path = upload_url + "/repos/" + owner + "/" + repo + "/releases/" + id + "?access_token=" + access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.PATCH);
 			request.AddHeader("Content-Type", "application/zip");
@@ -285,7 +286,7 @@ namespace GitHubRelease
 		{
 			// PATCH /repos/:owner/:repo/releases/assets/:id
 			/* string: name, label */
-			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/assets" + id;
+			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/assets" + id + "?access_token=" + access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.PATCH);
 			request.AddHeader("Content-Type", "application/zip");
@@ -307,7 +308,7 @@ namespace GitHubRelease
 		static IRestResponse DeleteReleaseAsset(string owner, string repo, string id)
 		{
 			// DELETE /repos/:owner/:repo/releases/assets/:id
-			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/assets" + id;
+			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/assets" + id + "?access_token=" + access_token;
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.DELETE);
 			IRestResponse response = client.Execute(request);
