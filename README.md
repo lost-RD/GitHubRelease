@@ -75,22 +75,7 @@ A valid use of assets would look like this: `GitHubRelease assets -o lost-rd -r 
     "label": null,
     "uploader": {
       "login": "lost-RD",
-      "id": 2283707,
-      "avatar_url": "https://avatars1.githubusercontent.com/u/2283707?v=3",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/lost-RD",
-      "html_url": "https://github.com/lost-RD",
-      "followers_url": "https://api.github.com/users/lost-RD/followers",
-      "following_url": "https://api.github.com/users/lost-RD/following{/other_user}",
-      "gists_url": "https://api.github.com/users/lost-RD/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/lost-RD/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/lost-RD/subscriptions",
-      "organizations_url": "https://api.github.com/users/lost-RD/orgs",
-      "repos_url": "https://api.github.com/users/lost-RD/repos",
-      "events_url": "https://api.github.com/users/lost-RD/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/lost-RD/received_events",
-      "type": "User",
-      "site_admin": false
+	  ...
     },
     "content_type": "application/x-msdownload",
     "state": "uploaded",
@@ -102,3 +87,7 @@ A valid use of assets would look like this: `GitHubRelease assets -o lost-rd -r 
   }
 ]
 ```
+
+### Access Token
+
+For actions that read information, no access token is necessary, but for actions that make changes you must provide an access token. Tokens can be obtained at [this address](https://github.com/settings/tokens). Ensure you tick the repo checkbox. Copy the access token into a file called `access.token` which must be in the same directory as the executable file (`GitHubRelease.exe`).

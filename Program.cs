@@ -156,7 +156,7 @@ namespace GitHubRelease
 			request.AddParameter("body", body, "application/json", ParameterType.RequestBody);
 			request.AddParameter("draft", draft, "application/json", ParameterType.RequestBody);
 			request.AddParameter("prerelease", prerelease, "application/json", ParameterType.RequestBody);
-			Console.WriteLine(client_path);
+			//Console.WriteLine(client_path);
 			Console.WriteLine(JsonConvert.SerializeObject(request.Parameters, Formatting.Indented).ToString());
 			IRestResponse response = client.Execute(request);
 			return response;
@@ -168,7 +168,7 @@ namespace GitHubRelease
 			IRestResponse response = PostRelease(owner, repo);
 			ApiResponse json = JsonConvert.DeserializeObject<ApiResponse>(response.Content);
 			Console.WriteLine(JsonConvert.SerializeObject(json, Formatting.Indented).ToString());
-			Console.WriteLine(response.StatusDescription+response.Content+response.ResponseUri);
+			Console.WriteLine(response.StatusDescription+response.Content);
 			return 1;
 		}
 
