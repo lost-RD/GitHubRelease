@@ -149,12 +149,14 @@ namespace GitHubRelease
 			string client_path = root + "/repos/" + owner + "/" + repo + "/releases";
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.POST);
-			request.AddParameter("tag_name", tag_name, ParameterType.RequestBody);
-			request.AddParameter("target_commitish", target_commitish, ParameterType.RequestBody);
-			request.AddParameter("name", name, ParameterType.RequestBody);
-			request.AddParameter("body", body, ParameterType.RequestBody);
-			request.AddParameter("draft", draft, ParameterType.RequestBody);
-			request.AddParameter("prerelease", prerelease, ParameterType.RequestBody);
+			request.AddParameter("tag_name", tag_name, "application/json", ParameterType.RequestBody);
+			request.AddParameter("target_commitish", target_commitish, "application/json", ParameterType.RequestBody);
+			request.AddParameter("name", name, "application/json", ParameterType.RequestBody);
+			request.AddParameter("body", body, "application/json", ParameterType.RequestBody);
+			request.AddParameter("draft", draft, "application/json", ParameterType.RequestBody);
+			request.AddParameter("prerelease", prerelease, "application/json", ParameterType.RequestBody);
+			Console.WriteLine(client_path);
+			Console.WriteLine(JsonConvert.SerializeObject(request.Parameters, Formatting.Indented).ToString());
 			IRestResponse response = client.Execute(request);
 			return response;
 		}
@@ -165,6 +167,7 @@ namespace GitHubRelease
 			IRestResponse response = PostRelease(owner, repo);
 			ApiResponse json = JsonConvert.DeserializeObject<ApiResponse>(response.Content);
 			Console.WriteLine(JsonConvert.SerializeObject(json, Formatting.Indented).ToString());
+			Console.WriteLine(response.StatusDescription+response.Content+response.ResponseUri);
 			return 1;
 		}
 
@@ -218,6 +221,7 @@ namespace GitHubRelease
 		{
 			// GET /repos/:owner/:repo/releases/:id/assets
 			string client_path = root + "/repos/" + owner + "/" + repo + "/releases/" + id + "/assets";
+			Console.WriteLine(client_path);
 			var client = new RestClient(client_path);
 			var request = new RestRequest(Method.GET);
 			IRestResponse response = client.Execute(request);

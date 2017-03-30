@@ -63,3 +63,42 @@ ERROR(S):
 
   --version      Display version information.
   ```
+  
+A valid use of assets would look like this: `GitHubRelease assets -o lost-rd -r GitHubRelease --id 5918561` and the output currently looks like this:
+
+```JSON
+[
+  {
+    "url": "https://api.github.com/repos/lost-RD/GitHubRelease/releases/assets/3521911",
+    "id": 3521911,
+    "name": "GitHubRelease.exe",
+    "label": null,
+    "uploader": {
+      "login": "lost-RD",
+      "id": 2283707,
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2283707?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/lost-RD",
+      "html_url": "https://github.com/lost-RD",
+      "followers_url": "https://api.github.com/users/lost-RD/followers",
+      "following_url": "https://api.github.com/users/lost-RD/following{/other_user}",
+      "gists_url": "https://api.github.com/users/lost-RD/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/lost-RD/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/lost-RD/subscriptions",
+      "organizations_url": "https://api.github.com/users/lost-RD/orgs",
+      "repos_url": "https://api.github.com/users/lost-RD/repos",
+      "events_url": "https://api.github.com/users/lost-RD/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/lost-RD/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "content_type": "application/x-msdownload",
+    "state": "uploaded",
+    "size": 24576,
+    "download_count": 0,
+    "created_at": "2017-03-30T06:54:05Z",
+    "updated_at": "2017-03-30T06:54:08Z",
+    "browser_download_url": "https://github.com/lost-RD/GitHubRelease/releases/download/0.1-pre/GitHubRelease.exe"
+  }
+]
+```
