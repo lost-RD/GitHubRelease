@@ -1,10 +1,10 @@
-#GitHubRelease
+# GitHubRelease
 
-##A command line tool for using the GitHub Release API
+## A command line tool for using the GitHub Release API
 
 This project uses packages from Nuget including CommandLine 2.1.1-beta, Newtonsoft.Json 9.0.1 and RestSharp 105.2.3.
 
-###Usage
+### Usage
 
 `GitHubRelease help` for a list of verbs. The output looks like this:
 
