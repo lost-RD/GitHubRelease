@@ -97,21 +97,20 @@ namespace GitHubRelease
 }
 		int Main(string[] args)
 		{
-			return Parser.Default.ParseArguments<ListReleasesOptions, GetReleaseFromIdOptions, GetReleaseFromTagOptions, GetReleaseLatestOptions, PostReleaseOptions, EditReleaseOptions, DeleteReleaseOptions, ListReleaseAssetsOptions, GetSingleReleaseAssetOptions, UploadReleaseAssetOptions, EditReleaseAssetOptions, DeleteReleaseAssetOptions, DummyOptions, DummyOptions>(args)
-			  .MapResult(
-				(
-					(ListReleasesOptions opts) => ListReleases(opts.Owner, opts.Repo),
-					(GetReleaseFromIdOptions opts) => GetReleaseFromId(opts.Owner, opts.Repo, opts.Id),
-					(GetReleaseFromTagOptions opts) => GetReleaseFromTag(opts.Owner, opts.Repo, opts.Tag),
-					(GetReleaseLatestOptions opts) => GetReleaseLatest(opts.Owner, opts.Repo),
-					(PostReleaseOptions opts) => PostRelease(opts.Owner, opts.Repo),
-					(EditReleaseOptions opts) => EditRelease(opts.Owner, opts.Repo, opts.Id),
-					(DeleteReleaseOptions opts) => DeleteRelease(opts.Owner, opts.Repo, opts.Id),
-					(ListReleaseAssetsOptions opts) => ListReleaseAssets(opts.Owner, opts.Repo, opts.Id),
-					(GetSingleReleaseAssetOptions opts) => GetSingleReleaseAsset(opts.Owner, opts.Repo, opts.Id),
-					(UploadReleaseAssetOptions opts) => UploadReleaseAsset(opts.Owner, opts.Repo, opts.Id),
-					(EditReleaseAssetOptions opts) => EditReleaseAsset(opts.Owner, opts.Repo, opts.Id),
-					(DeleteReleaseAssetOptions opts) => DeleteReleaseAsset(opts.Owner, opts.Repo, opts.Id),
-					(DummyOptions opts) => Dummy(opts.Owner, opts.Repo),
+			return Parser.Default.ParseArguments<ListReleasesOptions, GetReleaseFromIdOptions, GetReleaseFromTagOptions, GetReleaseLatestOptions, PostReleaseOptions, EditReleaseOptions, DeleteReleaseOptions, ListReleaseAssetsOptions, GetSingleReleaseAssetOptions, UploadReleaseAssetOptions, EditReleaseAssetOptions, DeleteReleaseAssetOptions, DummyOptions>(args)
+			  .MapResult<ListReleasesOptions, GetReleaseFromIdOptions, GetReleaseFromTagOptions, GetReleaseLatestOptions, PostReleaseOptions, EditReleaseOptions, DeleteReleaseOptions, ListReleaseAssetsOptions, GetSingleReleaseAssetOptions, UploadReleaseAssetOptions, EditReleaseAssetOptions, DeleteReleaseAssetOptions, DummyOptions, int>(
+					(ListReleasesOptions opts) => Verb_list(opts.Owner, opts.Repo),
+					(GetReleaseFromIdOptions opts) => Verb_release_id(opts.Owner, opts.Repo, opts.Id),
+					(GetReleaseFromTagOptions opts) => Verb_release_tag(opts.Owner, opts.Repo, opts.Tag),
+					(GetReleaseLatestOptions opts) => Verb_latest(opts.Owner, opts.Repo),
+					(PostReleaseOptions opts) => Verb_release(opts.Owner, opts.Repo),
+					(EditReleaseOptions opts) => Verb_edit(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseOptions opts) => Verb_delete(opts.Owner, opts.Repo, opts.Id),
+					(ListReleaseAssetsOptions opts) => Verb_assets(opts.Owner, opts.Repo, opts.Id),
+					(GetSingleReleaseAssetOptions opts) => Verb_asset_id(opts.Owner, opts.Repo, opts.Id),
+					(UploadReleaseAssetOptions opts) => Verb_upload_asset(opts.Owner, opts.Repo, opts.Id),
+					(EditReleaseAssetOptions opts) => Verb_edit_asset(opts.Owner, opts.Repo, opts.Id),
+					(DeleteReleaseAssetOptions opts) => Verb_delete_asset(opts.Owner, opts.Repo, opts.Id),
+					(DummyOptions opts) => Verb_dummy(opts.Owner, opts.Repo),
 				errs => 1);
 		}

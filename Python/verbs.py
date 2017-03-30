@@ -47,28 +47,29 @@ namespace GitHubRelease
 		outfile.write("""}""".replace(">", "}"))
 
 		outfile.write("""
-		int Main(string[] args)
+		static int Main(string[] args)
 		{
 			return Parser.Default.ParseArguments<""")
+		options = ""
+		for row in data:
+			verb = row['verb']
+			method = row['method']
+			helptext = row['helptext']
+			arg = row['arg']
+			options = options+"{method}Options, ".format(method=method)
+
+		outfile.write(options[:-2])
+		
+		outfile.write(""">(args)
+			  .MapResult(
+""".format(options=options))
 
 		for row in data:
 			verb = row['verb']
 			method = row['method']
 			helptext = row['helptext']
 			arg = row['arg']
-			outfile.write("{method}Options, ".format(method=method))
-		outfile.write("DummyOptions")
-		
-		outfile.write(""">(args)
-			  .MapResult(
-				(
-""")
-		for row in data:
-			verb = row['verb']
-			method = row['method']
-			helptext = row['helptext']
-			arg = row['arg']
-			outfile.write("""					({method}Options opts) => {method}(opts.Owner, opts.Repo""".format(method=method))
+			outfile.write("""					({method}Options opts) => Verb_{verb}(opts.Owner, opts.Repo""".format(method=method, verb=verb).replace("-", "_"))
 			if arg:
 				if arg=="Id":
 					outfile.write(", opts.Id")
